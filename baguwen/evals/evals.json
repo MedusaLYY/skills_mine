@@ -1,0 +1,41 @@
+{
+  "skill_name": "baguwen",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "我准备复习前端八股，下面是我的 CSS 笔记，你给我按三轮挖空来考我：\\n\\n一、CSS基础\\n1. CSS选择器及其优先级\\n选择器格式优先级权重id选择器#id100类选择器.classname10属性选择器a[ref=\\\"eee\\\"]10伪类选择器li:last-child10标签选择器div1伪元素选择器li:after1相邻兄弟选择器h1+p0子选择器ul>li0后代选择器li a0通配符选择器*0\\n对于选择器的优先级：标签选择器、伪元素选择器：1；类选择器、伪类选择器、属性选择器：10；id 选择器：100；内联样式：1000。注意：!important声明的样式的优先级最高；如果优先级相同，则最后出现的样式生效；继承得到的样式的优先级最低；通用选择器、子选择器和相邻同胞选择器权值为 0；样式表来源优先级为：内联样式 > 内部样式 > 外部样式 > 浏览器用户自定义样式 > 浏览器默认样式。\\n2. CSS中可继承与不可继承属性有哪些\\n无继承性的属性包括 display、文本装饰、盒子模型、背景、定位、生成内容、轮廓、页面、声音样式。有继承性的属性包括 font-family、font-weight、font-size、font-style、text-indent、text-align、line-height、word-spacing、letter-spacing、text-transform、color、visibility、list-style、cursor。\\n3. display的属性值及其作用\\nnone 元素不显示，并且会从文档流中移除。block 块类型，默认宽度为父元素宽度，可设置宽高，换行显示。inline 行内元素，默认宽度为内容宽度，不可设置宽高，同行显示。inline-block 默认宽度为内容宽度，可以设置宽高，同行显示。list-item 像块类型元素一样显示，并添加样式列表标记。table 作为块级表格显示。inherit 从父元素继承 display 属性。\\n4. display的block、inline和inline-block的区别\\nblock 会独占一行，可以设置 width、height、margin 和 padding；inline 不会独占一行，设置 width、height 无效，可以设置水平方向的 margin 和 padding，不能设置垂直方向的 padding 和 margin；inline-block 将对象设置为 inline 对象，但对象的内容作为 block 对象呈现，之后的内联对象会排列在同一行内。",
+      "expected_output": "The response should honor the explicit cloze request, parse 4 CSS question cards, start card 1 with a noun/keyword cloze drill, and ask for answers using the `1=...；2=...` format instead of giving a lecture.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "这些笔记有点乱，你先别讲课，直接整理成题卡然后开始默写考我：\\n\\nJS 基础\\n1）var/let/const区别：var 有变量提升、函数作用域、可以重复声明；let 有块级作用域、暂时性死区、不能重复声明；const 声明常量，必须初始化，引用类型不能改引用地址但可以改内部属性。\\n闭包：函数可以访问其定义时所在词法作用域中的变量，即使外层函数已经执行完。常见用途：数据私有化、函数工厂、回调保存状态。缺点：可能造成内存泄漏。\\n事件循环：同步任务先进调用栈，异步任务进入任务队列；微任务优先于宏任务；Promise.then 是微任务，setTimeout 是宏任务。",
+      "expected_output": "The response should normalize mixed JS notes into separate cards, list the parsed cards briefly, and begin Round 1 as 答案骨架默写 rather than explaining the concepts.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "继续刚才 CSS 选择器优先级那题。我的回答是：1=id选择器；2=类选择器；3=伪类选择器；4=属性选择器；5=1；6=!important。下一轮里如果我把样式来源写成“内联 > 内部 > 外部 > 浏览器默认”，你要智能批改。",
+      "expected_output": "The response should accept the provided answers as mostly or fully correct for the current blanks, then explain that the later source-order answer would be partially correct because it misses browser user custom styles.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "帮我背这段八股文，主要练默写：\\n\\n六、this/call/apply/bind\\n1. 对this对象的理解\\nthis 是执行上下文中的一个属性，它指向最后一次调用这个方法的对象。在实际开发中，this 的指向可以通过四种调用模式来判断。第一种是函数调用模式，直接作为函数调用时 this 指向全局对象。第二种是方法调用模式，函数作为对象的方法调用时 this 指向这个对象。第三种是构造器调用模式，用 new 调用时 this 指向新创建的对象。第四种是 apply、call 和 bind 调用模式，这三个方法都可以显式指定 this 指向。优先级：构造器调用模式最高，然后是 apply、call、bind，然后是方法调用模式，最后是函数调用模式。\\n2. call() 和 apply() 的区别？\\n作用一样，区别在传参形式。apply 接收两个参数：this 绑定对象和参数数组/类数组。call 第一个参数也是 this 绑定对象，从第二个参数开始每个参数依次传入函数。\\n3. 实现 call、apply 及 bind 函数\\ncall 的实现步骤：判断调用对象是否为函数；处理 context，不存在则设为 window；截取参数；将函数作为 context 的临时属性；调用函数保存结果；删除临时属性；返回结果。apply 类似，但第二个参数作为数组展开。bind 需要保存当前函数引用和预置参数，返回新函数，新函数内部用 apply 绑定 this；如果作为构造函数 new 调用，则 this 指向新实例。",
+      "expected_output": "The response should parse this/call/apply/bind into 3 cards and start with 第 1 轮：答案骨架默写 for the first card. It should not show the full answer, and should ask the user to list the structure such as definition, four call modes, explicit binding, bind/new caveat, and priority order.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "我来默写 Promise 的理解：Promise 是处理异步的对象，有 pending、resolved、rejected 三种状态，可以用 then 注册回调。它的状态可以从 pending 变成成功或失败。请批改。",
+      "expected_output": "The response should semantically grade the answer as 部分通过, credit the correct core idea and states, then point out concrete missed points such as state immutability, fulfilled/rejected terminology if relevant, resolve/reject changing state, then callback as microtask if the current expected answer includes it, and add missed points to review instead of dumping a long lecture.",
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "背数据库八股，不是前端：事务的 ACID 特性包括原子性、一致性、隔离性、持久性。原子性指事务中的操作要么全部成功，要么全部失败；一致性指事务执行前后数据库都保持一致状态；隔离性指多个事务并发执行互不干扰；持久性指事务提交后修改会永久保存。开始默写。",
+      "expected_output": "The response should treat the notes as generic baguwen, parse one database card, and begin Round 1 答案骨架默写 with the four ACID items. It should not assume the material must be frontend.",
+      "files": []
+    }
+  ]
+}
